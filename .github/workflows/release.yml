@@ -29,6 +29,10 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
 
+      - name: Get all tags
+        if: steps.check.outputs.changed == 'true'
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
       - name: Create release branch
         if: steps.check.outputs.changed == 'true'
         uses: peterjgrainger/action-create-branch@v1.0.0
@@ -53,8 +57,11 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "release"
+
+      - name: Creating tags
+        if: steps.check.outputs.changed == 'true'
+        run: |
           git tag -fa v${{ steps.check.outputs.version }} -m v${{ steps.check.outputs.version }}
-          git push origin :refs/tags/v1
           git tag -fa v1 -m v${{ steps.check.outputs.version }}
 
       - name: Push changes
