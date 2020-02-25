@@ -28,15 +28,11 @@ jobs:
       - name: Log when changed
         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
-      
-      - name: Create Release
-        if: steps.check.outputs.changed == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release GitHub Actions
+        uses: technote-space/release-github-actions@v3
         with:
-          tag_name: v${{ steps.check.outputs.version }}
-          release_name: Release v${{ steps.check.outputs.version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Notification (Dogfooding)
         uses: bayssmekanique/action-simple-slack-notifier@master
