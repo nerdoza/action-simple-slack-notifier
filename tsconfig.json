@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./lib",
+    "rootDir": "./src",
+    "strict": true,
+    "newLine": "lf",
+    "declaration": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "lib": [
+      "es2016"
+    ]
+  },
+  "include": [
+    "./src/**/*",
+    "./node_modules/@types"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./dist"
+  ]
+}

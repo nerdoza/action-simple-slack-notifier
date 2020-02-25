@@ -1,0 +1,44 @@
+{
+  "name": "action-simple-slack-notifier",
+  "version": "0.0.0",
+  "author": "Zachary Cardoza",
+  "description": "GitHub Action for notifying Slack channel with simple configuration",
+  "license": "MIT",
+  "private": true,
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "ts-mocha test/*.ts",
+    "prebuild": "tsc",
+    "build": "ncc build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bayssmekanique/action-simple-slack-notifier.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "slack",
+    "notifier"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/github": "^2.1.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.4",
+    "@types/node-fetch": "^2.5.4",
+    "@zeit/ncc": "^0.21.1",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^7.0.1",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.0.0",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.8.2"
+  }
+}

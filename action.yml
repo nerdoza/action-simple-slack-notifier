@@ -1,0 +1,28 @@
+name: 'Simple Slack Notifier'
+description: 'Send a simple slack notification for build process'
+author: 'Zachary Cardoza'
+inputs:
+  token:
+    description: 'Slack Bot Token (required)'
+    required: true
+  success:
+    description: 'Build successful (recommended, defaults to true)'
+    default: 'true'
+  channel:
+    description: 'Target Slack channel (recommended, defaults to "#general")'
+    default: '#general'
+  name:
+    description: 'Process target name (optional, defaults to repo name)'
+  action:
+    description: 'Name of action (optional, defaults to "Build")'
+    default: 'Build'
+  version:
+    description: 'Build version (optional)'
+  platform:
+    description: 'Build platform (optional, must also have version set)'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'slack'  
+  color: 'orange'

@@ -1,0 +1,56 @@
+on: 
+  push:
+    branches:
+      - master
+
+name: Release
+
+jobs:
+  publish:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v1
+
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Check if version has been updated 
+        id: check
+        uses: EndBug/version-check@v1.2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          diff-search: true
+      
+      - name: Log when changed
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+
+      - name: Install Dependencies
+        if: steps.check.outputs.changed == 'true'
+        run: npm ci
+
+      - name: Build
+        if: steps.check.outputs.changed == 'true'
+        run: npm run build
+      
+      - name: Create Release
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.check.outputs.version }}
+          release_name: Release v${{ steps.check.outputs.version }}
+
+      - name: Send Notification
+        uses: bayssmekanique/action-simple-slack-notifier@master
+        if: steps.check.outputs.changed == 'true'
+        with:
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          channel: '#deployment'
+          version: ${{ steps.check.outputs.version }}
+    
