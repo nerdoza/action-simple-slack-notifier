@@ -1,7 +1,7 @@
 on: 
   push:
     branches:
-      - master
+      - test
 
 name: Release
 
@@ -12,10 +12,6 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v1
-
-      - name: Switch to release
-        run: |
-          git checkout -b release/v1
 
       - name: Use Node.js v12
         uses: actions/setup-node@v1
@@ -33,6 +29,11 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
 
+      - name: Create release branch
+        uses: peterjgrainger/action-create-branch@v1.0.0
+        with:
+          branch: release
+
       - name: Install Dependencies
         if: steps.check.outputs.changed == 'true'
         run: npm ci
@@ -45,13 +46,18 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: |
           awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
-          git commit -m "v1"
-          git push -f origin releases/v1
-          git push origin :refs/tags/v1
-          git tag -fa v1 -m "v1"
-          git push origin v1
+          git commit -m "release"
 
+      - name: Push changes
+        if: steps.check.outputs.changed == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release
+      
       - name: Create Release
         if: steps.check.outputs.changed == 'true'
         uses: actions/create-release@v1
@@ -60,6 +66,12 @@ jobs:
         with:
           tag_name: v${{ steps.check.outputs.version }}
           release_name: Release v${{ steps.check.outputs.version }}
+
+      - name: Delete release branch
+        uses: dawidd6/action-delete-branch@v2.0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branches: release
 
       - name: Send Notification (Dogfooding)
         uses: bayssmekanique/action-simple-slack-notifier@master
