@@ -31,6 +31,7 @@ jobs:
 
       - name: Release GitHub Actions
         uses: technote-space/release-github-actions@v3
+        if: steps.check.outputs.changed == 'true'
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
