@@ -54,7 +54,9 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "release"
+          git tag -fa v1
           git tag -fa v${{ steps.check.outputs.version }}
+          git tag -fa latest
 
       - name: Push changes
         if: steps.check.outputs.changed == 'true'
@@ -80,7 +82,7 @@ jobs:
           branches: release
 
       - name: Send Notification (Dogfooding)
-        uses: bayssmekanique/action-simple-slack-notifier@v1
+        uses: bayssmekanique/action-simple-slack-notifier@master
         if: steps.check.outputs.changed == 'true' && always()
         with:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
