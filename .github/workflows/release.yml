@@ -13,6 +13,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v1
 
+      - name: Switch to release
+        run: |
+        git checkout release/v1
+        git reset --hard master
+
       - name: Use Node.js v12
         uses: actions/setup-node@v1
         with:
@@ -36,6 +41,16 @@ jobs:
       - name: Build
         if: steps.check.outputs.changed == 'true'
         run: npm run build
+
+      - name: Push to release branch
+        run: |
+        awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
+        git add .
+        git commit -m "v1"
+        git push -f origin releases/v1
+        git push origin :refs/tags/v1
+        git tag -fa v1 -m "v1"
+        git push origin v1
 
       - name: Create Release
         if: steps.check.outputs.changed == 'true'
