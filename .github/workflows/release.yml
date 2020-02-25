@@ -62,18 +62,6 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         run: |
           git tag -fa v${{ steps.check.outputs.version }} -m v${{ steps.check.outputs.version }}
-          git tag -d v1
-
-      - name: Push changes
-        if: steps.check.outputs.changed == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release
-
-      - name: Creating v1 tag
-        if: steps.check.outputs.changed == 'true'
-        run: |
           git tag -fa v1 -m v${{ steps.check.outputs.version }}
 
       - name: Push changes
@@ -82,6 +70,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: release
+          tags: true
       
       - name: Create Release
         if: steps.check.outputs.changed == 'true'
