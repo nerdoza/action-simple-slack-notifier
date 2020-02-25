@@ -1,6 +1,6 @@
 {
   "name": "action-simple-slack-notifier",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "author": "Zachary Cardoza",
   "description": "GitHub Action for notifying Slack channel with simple configuration",
   "license": "MIT",
