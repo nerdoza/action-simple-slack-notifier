@@ -44,6 +44,7 @@ jobs:
         with:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           status: ${{ job.status }}
+          action: Release
           channel: '#notification-development'
           version: ${{ steps.check.outputs.version }}
     
