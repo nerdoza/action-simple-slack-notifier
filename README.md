@@ -9,6 +9,7 @@ This action sends a very compact message to a designated Slack channel. Ideal fo
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
+    status: ${{ job.status }}
     version: ${{ steps.check.outputs.version }}
     platform: Windows
 ```
@@ -32,13 +33,13 @@ This GitHub Action requires the use of the Slack App API.
 
 **Required** The Slack Bot Token
 
-###  `success`
+###  `status`
 
-**Optional** A boolean value indicating if the build process has succeeded. (Default: Job Status)
+**Optional** A string value indicating if the build process has succeeded. (Default: `success`)
 
 ### `channel`
 
-**Optional** The target channel for notification. (Default: `general`)
+**Optional** The target channel for notification. (Default: `#general`)
 
 ### `name`
 
@@ -63,6 +64,7 @@ This GitHub Action requires the use of the Slack App API.
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
+    status: ${{ job.status }}
 ```
 
 ![Simple Example Image](img/simple.png)
@@ -74,7 +76,7 @@ This GitHub Action requires the use of the Slack App API.
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
-    success: ${{ steps.build.outputs.valid }}
+    status: ${{ job.status }}
     channel: '#deployment'
     name: SuperImportantClientProject
     action: Deployment

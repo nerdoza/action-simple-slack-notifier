@@ -5,9 +5,9 @@ inputs:
   token:
     description: 'Slack Bot Token (required)'
     required: true
-  success:
-    description: 'Build successful (recommended, defaults to true)'
-    default: 'true'
+  status:
+    description: 'Build status (recommended, defaults to "success")'
+    default: 'success'
   channel:
     description: 'Target Slack channel (recommended, defaults to "#general")'
     default: '#general'

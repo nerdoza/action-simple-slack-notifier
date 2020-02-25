@@ -51,6 +51,7 @@ jobs:
         if: steps.check.outputs.changed == 'true'
         with:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
+          status: ${{ job.status }}
           channel: '#notification-development'
           version: ${{ steps.check.outputs.version }}
     
