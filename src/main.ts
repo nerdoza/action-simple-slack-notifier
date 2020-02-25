@@ -1,5 +1,5 @@
-import core from '@actions/core'
-import github from '@actions/github'
+import * as core from '@actions/core'
+import * as github from '@actions/github'
 import SendSlack from './slack'
 
 function toBoolean (value: string) {
@@ -45,6 +45,7 @@ async function run (): Promise < void > {
 
     core.debug(result)
   } catch (error) {
+    console.log(error)
     core.setFailed(error.message)
     process.exit(1)
   }

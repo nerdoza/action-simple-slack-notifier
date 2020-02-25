@@ -2001,12 +2001,19 @@ function checkMode (stat, options) {
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const core_1 = __importDefault(__webpack_require__(470));
-const github_1 = __importDefault(__webpack_require__(469));
+const core = __importStar(__webpack_require__(470));
+const github = __importStar(__webpack_require__(469));
 const slack_1 = __importDefault(__webpack_require__(570));
 function toBoolean(value) {
     return value === 'true' ? true : false;
@@ -2016,20 +2023,20 @@ async function run() {
     try {
         let { SLACK_BOT_TOKEN } = process.env;
         if (!SLACK_BOT_TOKEN) {
-            SLACK_BOT_TOKEN = core_1.default.getInput('token', { required: true });
+            SLACK_BOT_TOKEN = core.getInput('token', { required: true });
         }
         if (!SLACK_BOT_TOKEN) {
             throw new Error('Missing SLACK_BOT_TOKEN');
         }
-        core_1.default.setSecret(SLACK_BOT_TOKEN);
-        const successText = core_1.default.getInput('success');
-        const channel = core_1.default.getInput('channel');
-        const name = core_1.default.getInput('name') || ((_a = github_1.default.context.payload.repository) === null || _a === void 0 ? void 0 : _a.full_name) || '';
-        const url = ((_b = github_1.default.context.payload.repository) === null || _b === void 0 ? void 0 : _b.html_url) || '';
-        const action = core_1.default.getInput('action');
-        const version = core_1.default.getInput('version');
-        const platform = core_1.default.getInput('platform');
-        const job = JSON.parse(core_1.default.getInput('JOB', { required: true }));
+        core.setSecret(SLACK_BOT_TOKEN);
+        const successText = core.getInput('success');
+        const channel = core.getInput('channel');
+        const name = core.getInput('name') || ((_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.full_name) || '';
+        const url = ((_b = github.context.payload.repository) === null || _b === void 0 ? void 0 : _b.html_url) || '';
+        const action = core.getInput('action');
+        const version = core.getInput('version');
+        const platform = core.getInput('platform');
+        const job = JSON.parse(core.getInput('JOB', { required: true }));
         const success = successText ? toBoolean(successText) : job.status;
         const result = await slack_1.default(SLACK_BOT_TOKEN, {
             success,
@@ -2040,10 +2047,11 @@ async function run() {
             version,
             platform
         });
-        core_1.default.debug(result);
+        core.debug(result);
     }
     catch (error) {
-        core_1.default.setFailed(error.message);
+        console.log(error);
+        core.setFailed(error.message);
         process.exit(1);
     }
 }
