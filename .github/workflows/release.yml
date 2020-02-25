@@ -48,7 +48,7 @@ jobs:
       - name: Push to release branch
         if: steps.check.outputs.changed == 'true' || true
         run: |
-          "awk '!/dist\\/\*\*\\/\*/' .gitignore > tmp && mv tmp .gitignore"
+          "awk '!/dist\\/\*\\/*/' .gitignore > tmp && mv tmp .gitignore"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
