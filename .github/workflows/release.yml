@@ -54,9 +54,8 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "release"
-          git tag -fa v1
-          git tag -fa v${{ steps.check.outputs.version }}
-          git tag -fa latest
+          git tag -fa v1 -m v${{ steps.check.outputs.version }}
+          git tag -fa v${{ steps.check.outputs.version }} v${{ steps.check.outputs.version }}
 
       - name: Push changes
         if: steps.check.outputs.changed == 'true'
