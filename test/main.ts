@@ -4,7 +4,7 @@ require('dotenv').config()
 
 // tslint:disable: no-unused-expression
 
-const token = process.env.TESTING_SLACK_BOT_TOKEN
+const token = process.env.SLACK_BOT_TOKEN
 const channel = '#notification-development'
 const name = 'GHASimpleSlackNotifier'
 const url = 'https://github.com/bayssmekanique/action-simple-slack-notifier'
