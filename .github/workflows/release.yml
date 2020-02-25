@@ -7,7 +7,7 @@ name: Release
 
 jobs:
   publish:
-    name: Release, Tag, Notify
+    name: Release and Notify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -37,12 +37,6 @@ jobs:
         with:
           tag_name: v${{ steps.check.outputs.version }}
           release_name: Release v${{ steps.check.outputs.version }}
-      
-      - name: Set v1 Tag
-        uses: tvdias/github-tagger@v0.0.1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v1
 
       - name: Send Notification (Dogfooding)
         uses: bayssmekanique/action-simple-slack-notifier@master
