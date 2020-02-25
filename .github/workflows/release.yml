@@ -30,7 +30,10 @@ jobs:
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
 
       - name: Create release branch
+        if: steps.check.outputs.changed == 'true'
         uses: peterjgrainger/action-create-branch@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: release
 
@@ -69,6 +72,7 @@ jobs:
 
       - name: Delete release branch
         uses: dawidd6/action-delete-branch@v2.0.1
+        if: steps.check.outputs.changed == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: release
