@@ -15,7 +15,7 @@ jobs:
 
       - name: Switch to release
         run: |
-          git checkout release/v1
+          git checkout -b release/v1
           git reset --hard master
 
       - name: Use Node.js v12
@@ -43,6 +43,7 @@ jobs:
         run: npm run build
 
       - name: Push to release branch
+        if: steps.check.outputs.changed == 'true'
         run: |
           awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
           git add .
