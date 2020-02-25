@@ -2026,7 +2026,7 @@ async function run() {
             throw new Error('Missing SLACK_BOT_TOKEN');
         }
         core.setSecret(SLACK_BOT_TOKEN);
-        const success = core.getInput('status') === 'success';
+        const success = core.getInput('status') === 'Success';
         const channel = core.getInput('channel');
         const name = core.getInput('name') || ((_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.full_name) || '';
         const url = ((_b = github.context.payload.repository) === null || _b === void 0 ? void 0 : _b.html_url) || '';
