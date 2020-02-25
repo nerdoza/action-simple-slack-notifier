@@ -48,7 +48,7 @@ jobs:
       - name: Push to release branch
         if: steps.check.outputs.changed == 'true'
         run: |
-          awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
+          awk \'!/dist\/**\/*/\' .gitignore > tmp && mv tmp .gitignore
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
@@ -72,7 +72,7 @@ jobs:
 
       - name: Delete release branch
         uses: dawidd6/action-delete-branch@v2.0.1
-        if: steps.check.outputs.changed == 'true'
+        if: steps.check.outputs.changed == 'true' && false
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: release
