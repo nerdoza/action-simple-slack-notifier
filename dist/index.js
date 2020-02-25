@@ -2015,9 +2015,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(470));
 const github = __importStar(__webpack_require__(469));
 const slack_1 = __importDefault(__webpack_require__(570));
-function toBoolean(value) {
-    return value === 'true' ? true : false;
-}
 async function run() {
     var _a, _b;
     try {
@@ -2029,15 +2026,13 @@ async function run() {
             throw new Error('Missing SLACK_BOT_TOKEN');
         }
         core.setSecret(SLACK_BOT_TOKEN);
-        const successText = core.getInput('success');
+        const success = core.getInput('status') === 'success';
         const channel = core.getInput('channel');
         const name = core.getInput('name') || ((_a = github.context.payload.repository) === null || _a === void 0 ? void 0 : _a.full_name) || '';
         const url = ((_b = github.context.payload.repository) === null || _b === void 0 ? void 0 : _b.html_url) || '';
         const action = core.getInput('action');
         const version = core.getInput('version');
         const platform = core.getInput('platform');
-        const job = JSON.parse(core.getInput('JOB', { required: true }));
-        const success = successText ? toBoolean(successText) : job.status;
         const result = await slack_1.default(SLACK_BOT_TOKEN, {
             success,
             channel,

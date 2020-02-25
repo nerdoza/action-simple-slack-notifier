@@ -28,14 +28,6 @@ jobs:
       - name: Log when changed
         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
-
-      - name: Install Dependencies
-        if: steps.check.outputs.changed == 'true'
-        run: npm ci
-
-      - name: Build
-        if: steps.check.outputs.changed == 'true'
-        run: npm run build
       
       - name: Create Release
         if: steps.check.outputs.changed == 'true'
@@ -45,8 +37,14 @@ jobs:
         with:
           tag_name: v${{ steps.check.outputs.version }}
           release_name: Release v${{ steps.check.outputs.version }}
+      
+      - name: Set v1 Tag
+        uses: tvdias/github-tagger@v0.0.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v1
 
-      - name: Send Notification
+      - name: Send Notification (Dogfooding)
         uses: bayssmekanique/action-simple-slack-notifier@master
         if: steps.check.outputs.changed == 'true'
         with:
