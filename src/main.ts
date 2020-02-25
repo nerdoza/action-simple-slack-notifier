@@ -18,7 +18,7 @@ async function run (): Promise < void > {
 
     core.setSecret(SLACK_BOT_TOKEN)
 
-    const success = core.getInput('status') === 'success'
+    const success = core.getInput('status') === 'Success'
     const channel = core.getInput('channel')
     const name = core.getInput('name') || github.context.payload.repository?.full_name || ''
     const url = github.context.payload.repository?.html_url || ''
