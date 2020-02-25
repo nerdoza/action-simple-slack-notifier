@@ -54,7 +54,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "release"
-          git tag -fa v${{ steps.check.outputs.version }} -m \"v${{ steps.check.outputs.version }}\"
+          git tag -fa v${{ steps.check.outputs.version }}
 
       - name: Push changes
         if: steps.check.outputs.changed == 'true'
@@ -74,14 +74,14 @@ jobs:
 
       - name: Delete release branch
         uses: dawidd6/action-delete-branch@v2.0.1
-        if: steps.check.outputs.changed == 'true' && false
+        if: steps.check.outputs.changed == 'true' && always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: release
 
       - name: Send Notification (Dogfooding)
-        uses: bayssmekanique/action-simple-slack-notifier@master
-        if: steps.check.outputs.changed == 'true'
+        uses: bayssmekanique/action-simple-slack-notifier@v1
+        if: steps.check.outputs.changed == 'true' && always()
         with:
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           status: ${{ job.status }}
