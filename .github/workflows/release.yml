@@ -44,13 +44,13 @@ jobs:
 
       - name: Push to release branch
         run: |
-        awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
-        git add .
-        git commit -m "v1"
-        git push -f origin releases/v1
-        git push origin :refs/tags/v1
-        git tag -fa v1 -m "v1"
-        git push origin v1
+          awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
+          git add .
+          git commit -m "v1"
+          git push -f origin releases/v1
+          git push origin :refs/tags/v1
+          git tag -fa v1 -m "v1"
+          git push origin v1
 
       - name: Create Release
         if: steps.check.outputs.changed == 'true'
