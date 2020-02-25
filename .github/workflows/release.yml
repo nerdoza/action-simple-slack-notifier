@@ -48,14 +48,12 @@ jobs:
       - name: Push to release branch
         if: steps.check.outputs.changed == 'true'
         run: |
-          echo "$(ls)"
           awk '!/dist\/**\/*/' .gitignore > tmp && mv tmp .gitignore
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "release"
-          git tag -fa v1 -m v${{ steps.check.outputs.version }}
-          git tag -fa v${{ steps.check.outputs.version }} v${{ steps.check.outputs.version }}
+          git tag -fa v${{ steps.check.outputs.version }} -m v${{ steps.check.outputs.version }}
 
       - name: Push changes
         if: steps.check.outputs.changed == 'true'
