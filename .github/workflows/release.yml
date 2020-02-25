@@ -15,8 +15,8 @@ jobs:
 
       - name: Switch to release
         run: |
-        git checkout release/v1
-        git reset --hard master
+          git checkout release/v1
+          git reset --hard master
 
       - name: Use Node.js v12
         uses: actions/setup-node@v1
