@@ -16,7 +16,7 @@ This action sends a very compact message to a designated Slack channel. Ideal fo
 
 *Output:*
 
-![Full Example Image](img/full.png)
+![Full Example Image](.github/img/full.png)
 
 ## Setting Up Slack App Bot
 
@@ -67,7 +67,7 @@ This GitHub Action requires the use of the Slack App API.
     status: ${{ job.status }}
 ```
 
-![Simple Example Image](img/simple.png)
+![Simple Example Image](.github/img/simple.png)
 
 ## Advanced Usage Example
 ```yml
@@ -84,7 +84,7 @@ This GitHub Action requires the use of the Slack App API.
     platform: Windows x86
 ```
 
-![Advanced Example Image](img/advanced.png)
+![Advanced Example Image](.github/img/advanced.png)
 
 ---
 
