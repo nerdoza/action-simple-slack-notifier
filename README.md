@@ -22,9 +22,9 @@ This action sends a very compact message to a designated Slack channel. Ideal fo
 
 This GitHub Action requires the use of the Slack App API.
 
-1. **Create a Slack App**. Go to [Slack Apps API](https://api.slack.com/apps), then click "Create New App". Give the app an appropriate name (ex: _GitHub Notifier_) and ensure that your *Development Slack Workspace* is selected.
-2. **Add a Bot**. Navigate to the **OAuth & Permissions** page under **Features** sidebar. Use the **Add an OAuth Scope** button and add the `chat:write` scope.  Then click the **Install App to Workspace** button on the top of the page.
-3. **Add token to secrets**. Copy the **Bot User OAuth Access Token** created after installing the app and set it as a secure token inside your GitHub repository.
+1. **Create a Slack App**. Go to [Slack Apps API](https://api.slack.com/apps), then click **Create New App**. Give the app an appropriate name (ex: _GitHub Notifier_) and ensure that your **Development Slack Workspace** is selected.
+2. **Add a Bot**. Navigate to the **OAuth & Permissions** page under **Features** sidebar. Use the **Add an OAuth Scope** button and add the `chat:write` scope. Then click the **Install App to Workspace** button on the top of the page.
+3. **Add token to secrets**. Copy the **Bot User OAuth Access Token** created after installing the app and set it as a secure token inside your GitHub repository (ex: *SLACK_BOT_TOKEN*).
 4. **Invite your bot**. Go to the target channel for your notification and invite your bot by referencing the bot (ex: `@github_notifier`).
 
 ## Inputs
