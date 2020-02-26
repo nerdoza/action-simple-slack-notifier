@@ -1,5 +1,5 @@
 name: 'Simple Slack Notifier'
-description: 'Send a simple slack notification for build process'
+description: 'Send a compact green/red slack notification for action status.'
 author: 'Zachary Cardoza'
 inputs:
   token:
