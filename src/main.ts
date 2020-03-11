@@ -21,7 +21,7 @@ async function run (): Promise < void > {
     const success = core.getInput('status') === 'Success'
     const channel = core.getInput('channel')
     const name = core.getInput('name') || github.context.payload.repository?.full_name || ''
-    const url = github.context.payload.repository?.html_url || ''
+    const url = core.getInput('url') || github.context.payload.repository?.html_url || ''
     const action = core.getInput('action')
     const version = core.getInput('version')
     const platform = core.getInput('platform')

@@ -16,6 +16,8 @@ inputs:
   action:
     description: 'Name of action (optional, defaults to "Build")'
     default: 'Build'
+  url:
+    description: 'Process target URL (optional, defaults to repo url)'
   version:
     description: 'Build version (optional)'
   platform:
