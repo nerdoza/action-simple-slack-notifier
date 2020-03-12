@@ -40,9 +40,9 @@ export default async function SendSlack (token: string, options: NotificationOpt
           }
         }
       ],
-      text: label,
       color: options.success ? '#008000' : '#FF0000'
-    }]
+    }],
+    text: label,
   }
 
   const request = await fetch('https://slack.com/api/chat.postMessage', {
@@ -59,6 +59,6 @@ export default async function SendSlack (token: string, options: NotificationOpt
   if (requestJson.ok) {
     return 'Slack Notification Successful'
   } else {
-    throw new Error(`Slack Notification Failed: ${requestJson}`)
+    throw new Error(`Slack Notification Failed: ${requestJson.error}`)
   }
 }
