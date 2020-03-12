@@ -40,6 +40,7 @@ export default async function SendSlack (token: string, options: NotificationOpt
           }
         }
       ],
+      text: label,
       color: options.success ? '#008000' : '#FF0000'
     }]
   }
