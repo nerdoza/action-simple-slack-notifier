@@ -49,6 +49,10 @@ This GitHub Action requires the use of the Slack App API.
 
 **Optional** The process name for notification. (Default: `Build`)
 
+### `url`
+
+**Optional** The url link applied to the process notification. Available options are `action`, `repo`, or a static url string. (Default: `action`)
+
 ### `version`
 
 **Optional** The version number for notification.
@@ -79,6 +83,7 @@ This GitHub Action requires the use of the Slack App API.
     status: ${{ job.status }}
     channel: '#deployment'
     name: SuperImportantClientProject
+    url: ${{ steps.monitor.monitor_url }}
     action: Deployment
     version: ${{ steps.check.outputs.version }}
     platform: Windows x86
