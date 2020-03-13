@@ -40,7 +40,8 @@ export default async function SendSlack (token: string, options: NotificationOpt
           }
         }
       ],
-      color: options.success ? '#008000' : '#FF0000'
+      color: options.success ? '#008000' : '#FF0000',
+      fallback: label,
     }]
   }
 
@@ -58,6 +59,6 @@ export default async function SendSlack (token: string, options: NotificationOpt
   if (requestJson.ok) {
     return 'Slack Notification Successful'
   } else {
-    throw new Error(`Slack Notification Failed: ${requestJson}`)
+    throw new Error(`Slack Notification Failed: ${requestJson.error}`)
   }
 }
