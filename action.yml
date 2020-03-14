@@ -18,6 +18,7 @@ inputs:
     default: 'Build'
   url:
     description: 'Process target URL (optional, accepts `repo`, `action`, or a static URL string)'
+    default: 'action'
   version:
     description: 'Build version (optional)'
   platform:
