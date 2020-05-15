@@ -20,7 +20,7 @@ async function run (): Promise < void > {
 
     core.setSecret(SLACK_BOT_TOKEN)
 
-    const success = core.getInput('status') === 'Success'
+    const success = core.getInput('status').toLowerCase() === 'success'
     const channel = core.getInput('channel')
     const name = core.getInput('name') || GITHUB_REPOSITORY || ''
     const action = core.getInput('action')
@@ -28,7 +28,7 @@ async function run (): Promise < void > {
     const platform = core.getInput('platform')
     let url = core.getInput('url')
 
-    switch(url) {
+    switch (url) {
       case 'action':
         url = `https://github.com/${ GITHUB_REPOSITORY }/actions/runs/${ GITHUB_RUN_ID }`
         break
