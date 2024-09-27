@@ -85,13 +85,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: release
 
-      - name: Send Notification (Dogfooding)
-        uses: bayssmekanique/action-simple-slack-notifier@v1
-        if: steps.check.outputs.changed == 'true' && always()
-        with:
-          token: ${{ secrets.SLACK_BOT_TOKEN }}
-          status: ${{ job.status }}
-          action: Release
-          channel: '#notification-development'
-          version: ${{ steps.check.outputs.version }}
+      # - name: Send Notification (Dogfooding)
+      #   uses: bayssmekanique/action-simple-slack-notifier@v1
+      #   if: steps.check.outputs.changed == 'true' && always()
+      #   with:
+      #     token: ${{ secrets.SLACK_BOT_TOKEN }}
+      #     status: ${{ job.status }}
+      #     action: Release
+      #     channel: '#notification-development'
+      #     version: ${{ steps.check.outputs.version }}
     
