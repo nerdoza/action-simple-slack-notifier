@@ -5,7 +5,7 @@ This action sends a very compact message to a designated Slack channel. Ideal fo
 ## Usage
 ```yml
 - name: Send Notification
-  uses: bayssmekanique/action-simple-slack-notifier@v1
+  uses: nerdoza/action-simple-slack-notifier@v1
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -64,7 +64,7 @@ This GitHub Action requires the use of the Slack App API.
 ## Simple Usage Example
 ```yml
 - name: Send Notification
-  uses: bayssmekanique/action-simple-slack-notifier@v1
+  uses: nerdoza/action-simple-slack-notifier@v1
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -76,7 +76,7 @@ This GitHub Action requires the use of the Slack App API.
 ## Advanced Usage Example
 ```yml
 - name: Send Notification
-  uses: bayssmekanique/action-simple-slack-notifier@v1
+  uses: nerdoza/action-simple-slack-notifier@v1
   if: always()
   with:
     token: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -94,4 +94,4 @@ This GitHub Action requires the use of the Slack App API.
 ---
 
 ## Copyright and License
-© 2020 Zachary Cardoza under the [MIT license](LICENSE.md).
+© 2024 Zachary Cardoza under the [MIT license](LICENSE.md).
